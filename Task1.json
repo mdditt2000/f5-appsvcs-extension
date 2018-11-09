@@ -1,0 +1,59 @@
+{
+    "class": "AS3",
+    "action": "deploy",
+    "persist": true,
+    "declaration": {
+        "class": "ADC",
+        "schemaVersion": "3.7.0",
+        "id": "example-declaration-01",
+        "label": "Task1",
+        "remark": "Task 1 - HTTP Application Service",
+        "target": {
+            "hostname": "ip-10-1-1-10.us-west-2.compute.internal"
+        },
+        "Task1": {
+            "class": "Tenant",
+            "MyWebApp1": {
+                "class": "Application",
+                "template": "http",
+                "statsProfile": {
+                    "class": "Analytics_Profile",
+                    "collectedStatsInternalLogging": true,
+                    "collectedStatsExternalLogging": false,
+                    "capturedTrafficInternalLogging": false,
+                    "capturedTrafficExternalLogging": true,
+                    "collectPageLoadTime": true,
+                    "collectClientSideStatistics": true,
+                    "collectResponseCode": true,
+                    "sessionCookieSecurity": "ssl-only"
+                },
+                "serviceMain": {
+                    "class": "Service_HTTP",
+                    "virtualAddresses": [
+                        "10.1.20.100"
+                    ],
+                    "pool": "web_pool",
+                    "profileAnalytics": {
+                        "use": "statsProfile"
+                    }
+                },
+                "web_pool": {
+                    "class": "Pool",
+                    "monitors": [
+                        "http"
+                    ],
+                    "members": [
+                        {
+                            "servicePort": 80,
+                            "serverAddresses": [
+                                "10.1.10.100",
+                                "10.1.10.101"
+                            ],
+                            "shareNodes": true
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
