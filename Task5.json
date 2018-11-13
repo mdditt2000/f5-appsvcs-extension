@@ -48,8 +48,7 @@
                             "serverAddresses": [
                                 "10.1.10.100",
                                 "10.1.10.101"
-                            ],
-                            "shareNodes": true
+                            ]
                         }
                     ]
                 }
@@ -90,8 +89,7 @@
                             "serverAddresses": [
                                 "10.1.10.100",
                                 "10.1.10.101"
-                            ],
-                            "shareNodes": true
+                            ]
                         }
                     ]
                 },
