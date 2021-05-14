@@ -1,0 +1,57 @@
+{
+    "$schema": "https://raw.githubusercontent.com/F5Networks/f5-appsvcs-extension/master/schema/latest/as3-schema.json",
+    "class": "AS3",
+    "action": "deploy",
+    "declaration": {
+        "class": "ADC",
+        "schemaVersion": "3.0.0",
+        "id": "UDP_DNS_Sample",
+        "label": "UDP_DNS_Sample",
+        "remark": "Sample of a UDP DNS Load Balancer Service",
+        "dns": {
+            "class": "Tenant",
+            "default_dns": {
+                "class": "Application",
+                "template": "generic",
+                "DNS_Listener": {
+                  "class": "Service_UDP",
+                  "profileDNS": {
+                      "use": "not_default"
+                  },
+                  "profileUDP": {
+                      "bigip": "/Common/udp"
+                  },
+                  "virtualPort": 53,
+                  "virtualAddresses": [
+                      "{externa_selfip}"
+                  ],
+                  "pool": {
+                    "use": "google_dns"
+                  },
+                  "snat":"auto",
+                  "translateClientPort":true,
+                  "translateServerAddress":true
+              },
+              "google_dns": {
+                  "class": "Pool",
+                  "members": [
+                      {
+                          "servicePort": 53,
+                          "serverAddresses": [
+                              "8.8.8.8"
+                          ]
+                      }
+                  ]
+              },
+              "not_default": {
+                "class": "DNS_Profile",
+                "localBindServerEnabled": true,
+                "recursionDesiredEnabled": true,
+                "dnsExpressEnabled":true,
+                "globalServerLoadBalancingEnabled":true
+            }
+            }
+
+        }
+    }
+}
