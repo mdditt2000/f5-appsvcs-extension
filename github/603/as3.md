@@ -25,4 +25,4 @@ Created the following pool
                 ],
 ```
 
-[diagram](https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/declarations/)
+[diagram](https://github.com/mdditt2000/f5-appsvcs-extension/blob/master/github/603/diagram/2022-05-04_13-14-34.png)
