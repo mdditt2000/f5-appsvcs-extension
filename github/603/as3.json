@@ -1,0 +1,32 @@
+{
+    "class": "ADC",
+    "schemaVersion": "3.0.0",
+    "id": "generated-for-testing",
+    "github": {
+        "class": "Tenant",
+        "app_601": {
+            "class": "Application",
+            "Service_1": {
+                "class": "Service_HTTP",
+                "virtualAddresses": [
+                    "10.0.0.1"
+                ],
+                "virtualPort": 80,
+                "pool": "Pool_1"
+            },
+            "Pool_1": {
+                "class": "Pool",
+                "members": [
+                    {
+                        "servicePort": 80,
+                        "serverAddresses": [
+                            "10.1.0.1",
+                            "10.1.0.2"
+                        ],
+                        "adminState": "disable"
+                    }
+                ]
+            }
+        }
+    }
+}
