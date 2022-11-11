@@ -31,9 +31,9 @@
                 "members": [
                     {
                         "servicePort": 80,
-                        "addressDiscovery": "fqdn",
-                        "autoPopulate": true,
-                        "hostname": "cafe.example.com"
+                        "serverAddresses": [
+                            "10.131.0.89"
+                          ]
                     }
                 ]
             },
