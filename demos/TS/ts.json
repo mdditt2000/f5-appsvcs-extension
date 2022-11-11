@@ -1,0 +1,30 @@
+ltm virtual /Common/test_venafi_dummy_443 {
+    destination /Common/171.179.33.73:443
+    ip-protocol tcp
+    mask 255.255.255.255
+    profiles {
+        /Common/http { }
+        /Common/tcp { }
+        /Common/venafi-dummy_443-clientssl {
+            context clientside
+        }
+    }
+    source 0.0.0.0/0
+    translate-address enabled
+    translate-port enabled
+}
+ltm profile client-ssl /Common/venafi-dummy_443-clientssl {
+    app-service none
+    cert /Common/default.crt
+    cert-key-chain {
+        default {
+            cert /Common/default.crt
+            key /Common/default.key
+        }
+    }
+    chain none
+    defaults-from /Common/clientssl
+    inherit-certkeychain true
+    key /Common/default.key
+    passphrase none
+}
