@@ -31,9 +31,9 @@
                 "members": [
                     {
                         "servicePort": 80,
-                        "addressDiscovery": "fqdn",
-                        "autoPopulate": true,
-                        "hostname": "cafe.example.com"
+                        "serverAddresses": [
+                            "10.131.0.89"
+                          ]
                     }
                 ]
             },
@@ -105,9 +105,7 @@
                         "server": {
                             "bigip": "/Common/ocp.f5demo.com"
                         },
-                        "virtualServer": {
-                            "use": "NginxIngress_vs"
-                        },
+                        "virtualServer": "/NginxIngress/Nginx.Ingress/NginxIngress_vs",
                         "dependsOn": "none"
                     }
                 ],
