@@ -48,6 +48,7 @@ Below is the AS3 deployment for creating the Data Center and Server. Diagram dis
     }
 }
 ```
+bigip-gslb [repo](https://github.com/mdditt2000/f5-appsvcs-extension/blob/master/user_guides/gslb/bigip-gslb-common.json)
 
 ### Step 1: Create GTM + LTM using AS3
 
@@ -184,4 +185,5 @@ Below is the AS3 declaration to deploy the GTM + LTM using a single AS3 declarat
     }
 }
 ```
+bigip-nginx [repo](https://github.com/mdditt2000/f5-appsvcs-extension/blob/master/user_guides/gslb/working-bigip-nginx.json)
 
