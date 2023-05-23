@@ -4,7 +4,7 @@ Declaration below works nicely
 
 * Yeah, that looks like what I'd expect for using a use pointer in the declaration. And you should see the GSLB_Server under /Common, which is expected behavior.
 
-![ui](https://github.com/mdditt2000/f5-appsvcs-extension/blob/master/github/715/diagram/2023-05-23_14-38-10.png)
+![ui](https://github.com/mdditt2000/f5-appsvcs-extension/blob/master/github/715/diagram/2023-05-23_15-53-17.png)
 
 ```
 {
