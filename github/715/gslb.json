@@ -9,7 +9,8 @@
             "class": "Application",
             "template": "shared",
             "Default_DC": {
-                "class": "GSLB_Data_Center"
+                "class": "GSLB_Data_Center",
+                "proberPreferred": "pool"
             },
             "ProberPool": {
                 "class": "GSLB_Prober_Pool",
