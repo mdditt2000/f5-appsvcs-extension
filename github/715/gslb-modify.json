@@ -9,18 +9,7 @@
             "class": "Application",
             "template": "shared",
             "Default_DC": {
-                "class": "GSLB_Data_Center",
-                "proberPreferred": "pool"
-            },
-            "ProberPool": {
-                "class": "GSLB_Prober_Pool",
-                "enabled": true,
-                "lbMode": "round-robin",
-                "members": [
-                    {
-                        "use": "/Common/bigip1.f5demo.com"
-                    }
-                ]
+                "class": "GSLB_Data_Center"
             },
             "bigip1.f5demo.com": {
                 "class": "GSLB_Server",
@@ -34,7 +23,7 @@
                 ],
                 "proberPreferred": "pool",
                 "proberPool": {
-                    "use": "ProberPool"
+                    "use": "/Common/ProberPool"
                 },
                 "virtualServerDiscoveryMode": "enabled",
                 "exposeRouteDomainsEnabled": true
