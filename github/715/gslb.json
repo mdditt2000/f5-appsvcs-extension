@@ -9,8 +9,24 @@
             "class": "Application",
             "template": "shared",
             "Default_DC": {
-                "class": "GSLB_Data_Center",
-                "proberPreferred": "pool"
+                "class": "GSLB_Data_Center"
+            },
+            "bigip1.f5demo.com": {
+                "class": "GSLB_Server",
+                "dataCenter": {
+                    "use": "Default_DC"
+                },
+                "proberPreferred": "pool",
+                "proberPool": {
+                    "use": "ProberPool"
+                },
+                "devices": [
+                    {
+                        "address": "10.192.125.63"
+                    }
+                ],
+                "virtualServerDiscoveryMode": "enabled",
+                "exposeRouteDomainsEnabled": true
             },
             "ProberPool": {
                 "class": "GSLB_Prober_Pool",
@@ -18,26 +34,13 @@
                 "lbMode": "round-robin",
                 "members": [
                     {
-                        "use": "/Common/bigip1.f5demo.com"
-                    }
-                ]
-            },
-            "bigip1.f5demo.com": {
-                "class": "GSLB_Server",
-                "dataCenter": {
-                    "use": "Default_DC"
-                },
-                "devices": [
-                    {
-                        "address": "10.192.125.63"
+                        "server": {
+                            "use": "/Common/bigip1.f5demo.com"
+                        },
+                        "memberOrder": 0
                     }
                 ],
-                "proberPreferred": "pool",
-                "proberPool": {
-                    "use": "ProberPool"
-                },
-                "virtualServerDiscoveryMode": "enabled",
-                "exposeRouteDomainsEnabled": true
+                "lbMode": "global-availability"
             }
         }
     }
