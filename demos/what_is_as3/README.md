@@ -1,6 +1,6 @@
 ## What is F5 Application Services 3
 
-https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/
+[Latest Documentation](https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/)
 
 ### Understanding imperative vs declarative  
 
@@ -12,6 +12,6 @@ https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/
 
 ### Questions?
 
-* Are you already using AS3?
-* Not going to use AS3 and why?
-* Used AS3 but stopped and why?
+* Are you already using AS3? [YouTube Demo](https://youtu.be/rjUUvaFaZX0)
+* Using Journeys Tool to Migration Apps to F5 BIG-IP [YouTube Demo](https://youtu.be/k08swhJCHQo)
+* Automate your F5 BIG-IP using VScode Extension [YouTube Demo](https://youtu.be/ekcM-ScUSVQ)
