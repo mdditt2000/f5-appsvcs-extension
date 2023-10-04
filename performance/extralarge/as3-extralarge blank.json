@@ -1,0 +1,8 @@
+{
+  "class": "ADC",
+  "schemaVersion": "3.0.0",
+  "id": "generated-for-testing",
+  "Tenant_ExtraLarge": {
+    "class": "Tenant"
+  }
+}
