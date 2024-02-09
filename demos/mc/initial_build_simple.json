@@ -1,0 +1,62 @@
+{
+    "$schema": "https://raw.githubusercontent.com/F5Networks/f5-appsvcs-extension/master/schema/latest/as3-schema.json",
+    "class": "AS3",
+    "action": "deploy",
+    "persist": true,
+    "declaration": {
+        "class": "ADC",
+        "schemaVersion": "3.45.0",
+        "label": "monitor_state_drift",
+        "remark": "initial_build_simple",
+        "monitor_tests": {
+            "class": "Tenant",
+            "A1": {
+                "class": "Application",
+                "service": {
+                    "class": "Service_Generic",
+                    "virtualAddresses": [
+                        "10.100.100.10"
+                    ],
+                    "pool": "postgres_pool",
+                    "virtualPort": 5432,
+                    "shareAddresses": true
+                },
+                "postgres_pool": {
+                    "class": "Pool",
+                    "members": [
+                        {
+                            "servicePort": 15455,
+                            "serverAddresses": [
+                                "10.1.10.5"
+                            ],
+                            "shareNodes": true,
+                            "monitors": [
+                                "tcp"
+                            ]
+                        },
+                        {
+                            "servicePort": 15456,
+                            "serverAddresses": [
+                                "10.1.10.5"
+                            ],
+                            "shareNodes": true,
+                            "monitors": [
+                                "tcp"
+                            ]
+                        },
+                        {
+                            "servicePort": 15457,
+                            "serverAddresses": [
+                                "10.1.10.5"
+                            ],
+                            "shareNodes": true,
+                            "monitors": [
+                                "tcp"
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
