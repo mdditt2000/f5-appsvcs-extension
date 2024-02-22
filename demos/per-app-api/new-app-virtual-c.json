@@ -1,0 +1,26 @@
+{
+    "schemaVersion": "3.50.0",
+    "application-c": {
+        "class": "Application",
+        "my-virtual-c": {
+            "class": "Service_HTTP",
+            "virtualAddresses": [
+                "10.1.2.9"
+            ],
+            "virtualPort": 80,
+            "pool": "my-pool-c"
+        },
+        "my-pool-c": {
+            "class": "Pool",
+            "members": [
+                {
+                    "servicePort": 80,
+                    "serverAddresses": [
+                        "10.1.0.5",
+                        "10.1.0.6"
+                    ]
+                }
+            ]
+        }
+    }
+}

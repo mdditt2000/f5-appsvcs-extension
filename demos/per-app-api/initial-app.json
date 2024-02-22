@@ -1,0 +1,31 @@
+{
+    "class": "ADC",
+    "schemaVersion": "3.0.0",
+    "id": "generated-for-testing",
+    "default": {
+        "class": "Tenant",
+        "application-a": {
+            "class": "Application",
+            "my-virtual-a": {
+                "class": "Service_HTTP",
+                "virtualAddresses": [
+                    "10.1.2.7"
+                ],
+                "virtualPort": 80,
+                "pool": "my-pool-a"
+            },
+            "my-pool-a": {
+                "class": "Pool",
+                "members": [
+                    {
+                        "servicePort": 80,
+                        "serverAddresses": [
+                            "10.1.0.1",
+                            "10.1.0.2"
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}
