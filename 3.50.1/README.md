@@ -1,0 +1,2 @@
+**Fixed**
+* AUTOTOOL-4238: (GitHub Issue 802): Endpoint_Policy action clientSsl does not error or set the false value when 'enable' is specified instead of 'enabled'. To help users who have 'enable' in production either property name will be accepted and work.
