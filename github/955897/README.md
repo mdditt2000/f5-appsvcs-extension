@@ -14,8 +14,4 @@ AS3 pulls the VirtualServer name from the description
                 "allow_0.0.0.0_0_pkadbap": {  ----------- VirtualServer name
 ```
 
-## Question
-
-1) What is incorrect about the VirtualServer?
-
-Customer can define the VirtualServer name
+VirtualServer is applied correctly. However I did not validate upgrading/downgrading BIG-IP
