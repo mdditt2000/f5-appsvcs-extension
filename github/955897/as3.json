@@ -1,0 +1,46 @@
+{
+    "class": "AS3",
+    "action": "deploy",
+    "persist": true,
+    "declaration": {
+        "class": "ADC",
+        "schemaVersion": "3.45.0",
+        "Tenant": {
+            "class": "Tenant",
+            "app_shared_0": {
+                "class": "Application",
+                "allow_0.0.0.0_0_pkadbap": {
+                    "translateServerAddress": false,
+                    "translateServerPort": false,
+                    "class": "Service_Forwarding",
+                    "forwardingType": "ip",
+                    "virtualAddresses": [
+                        {
+                            "use": "va_0.0.0.0_pkadbap"
+                        }
+                    ],
+                    "virtualPort": 0,
+                    "snat": "none"
+                },
+                "va_0.0.0.0_pkadbap": {
+                    "class": "Service_Address",
+                    "virtualAddress": "0.0.0.0%1",
+                    "arpEnabled": false,
+                    "icmpEcho": "disable"
+                },
+                "redirp_0.0.0.0_0_pkadbap": {
+                    "members": [
+                        {
+                            "servicePort": 0,
+                            "serverAddresses": [
+                                "10.2.126.41%1"
+                            ],
+                            "shareNodes": true
+                        }
+                    ],
+                    "class": "Pool"
+                }
+            }
+        }
+    }
+}
