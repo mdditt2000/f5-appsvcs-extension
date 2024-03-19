@@ -2,7 +2,7 @@
 
 When the virtual address is already defined, the **tmsh command** that is used to create virtual server should use the name of the virtual address. But when using the AS3 configuration, the **tmsh command** that the AS3 is forming when creating the virtual server is not using the name.
  
-###AS3 scenario:
+## AS3 scenario:
 * tmsh create ltm virtual-address test address any%100
 * tmsh create ltm virtual test destination any%100:0 
  
