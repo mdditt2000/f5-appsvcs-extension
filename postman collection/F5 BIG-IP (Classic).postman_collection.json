@@ -1,0 +1,212 @@
+{
+	"info": {
+		"_postman_id": "60f4c7e4-c2df-4f30-84b6-94216cf88096",
+		"name": "F5 BIG-IP (Classic)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14553435"
+	},
+	"item": [
+		{
+			"name": "info",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "f5PME123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://10.192.75.63/mgmt/shared/appsvcs/info",
+					"protocol": "https",
+					"host": [
+						"10",
+						"192",
+						"75",
+						"63"
+					],
+					"path": [
+						"mgmt",
+						"shared",
+						"appsvcs",
+						"info"
+					]
+				},
+				"description": "Information"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Config",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "f5PME123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://10.192.75.63/mgmt/shared/appsvcs/declare",
+					"protocol": "https",
+					"host": [
+						"10",
+						"192",
+						"75",
+						"63"
+					],
+					"path": [
+						"mgmt",
+						"shared",
+						"appsvcs",
+						"declare"
+					]
+				},
+				"description": "Declare"
+			},
+			"response": []
+		},
+		{
+			"name": "Deploy Config",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "f5PME123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"class\": \"ADC\",\r\n    \"schemaVersion\": \"3.0.0\",\r\n    \"id\": \"generated-for-testing\",\r\n    \"Tenant_1\": {\r\n        \"class\": \"Tenant\",\r\n        \"App_1\": {\r\n            \"class\": \"Application\",\r\n            \"Service_1\": {\r\n                \"class\": \"Service_HTTP\",\r\n                \"virtualAddresses\": [\r\n                    \"10.0.0.1\"\r\n                ],\r\n                \"virtualPort\": 80,\r\n                \"pool\": \"Pool_1\"\r\n            },\r\n            \"Pool_1\": {\r\n                \"class\": \"Pool\",\r\n                \"members\": [\r\n                    {\r\n                        \"servicePort\": 80,\r\n                        \"serverAddresses\": [\r\n                            \"10.1.0.1\",\r\n                            \"10.1.0.2\"\r\n                        ]\r\n                    }\r\n                ]\r\n            }\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://10.192.75.63/mgmt/shared/appsvcs/declare",
+					"protocol": "https",
+					"host": [
+						"10",
+						"192",
+						"75",
+						"63"
+					],
+					"path": [
+						"mgmt",
+						"shared",
+						"appsvcs",
+						"declare"
+					]
+				},
+				"description": "Declare"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Config",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "f5PME123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"class\": \"ADC\",\r\n    \"schemaVersion\": \"3.0.0\",\r\n    \"id\": \"generated-for-testing\",\r\n    \"Tenant_1\": {\r\n        \"class\": \"Tenant\",\r\n        \"App_1\": {\r\n            \"class\": \"Application\",\r\n            \"Service_1\": {\r\n                \"class\": \"Service_HTTP\",\r\n                \"virtualAddresses\": [\r\n                    \"10.0.0.1\"\r\n                ],\r\n                \"virtualPort\": 80,\r\n                \"pool\": \"Pool_1\"\r\n            },\r\n            \"Pool_1\": {\r\n                \"class\": \"Pool\",\r\n                \"members\": [\r\n                    {\r\n                        \"servicePort\": 80,\r\n                        \"serverAddresses\": [\r\n                            \"10.1.0.1\",\r\n                            \"10.1.0.2\"\r\n                        ]\r\n                    }\r\n                ]\r\n            }\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://10.192.75.63/mgmt/shared/appsvcs/declare",
+					"protocol": "https",
+					"host": [
+						"10",
+						"192",
+						"75",
+						"63"
+					],
+					"path": [
+						"mgmt",
+						"shared",
+						"appsvcs",
+						"declare"
+					]
+				},
+				"description": "Declare"
+			},
+			"response": []
+		}
+	]
+}

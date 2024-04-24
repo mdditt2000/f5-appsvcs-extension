@@ -1,0 +1,1937 @@
+{
+	"info": {
+		"_postman_id": "8d72f87e-ac31-47ad-8041-a424a890179b",
+		"name": "F5 CM (Next)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5565269"
+	},
+	"item": [
+		{
+			"name": "Setup",
+			"item": [
+				{
+					"name": "Change Password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"TOKEN\", pm.response.json().access_token);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const instanceInfo = JSON.parse(pm.environment.get(\"DEPLOYMENT_INFO\")).instances.find((instance) => instance.type === 'cm');",
+									"pm.environment.set(\"DEPLOYMENT_HOST\", `https://${instanceInfo.mgmt_address}:443`);",
+									"pm.environment.set(\"DEPLOYMENT_HOST_USERNAME\", instanceInfo.api_username);",
+									"pm.environment.set(\"DEPLOYMENT_HOST_PASSWORD\", instanceInfo.api_password);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin\",\n    \"temp_password\": \"admin\",\n    \"new_password\": \"F5site02!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/change-password",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Install Services",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"TOKEN\", pm.response.json().access_token);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const instanceInfo = JSON.parse(pm.environment.get(\"DEPLOYMENT_INFO\")).instances.find((instance) => instance.type === 'cm');",
+									"pm.environment.set(\"DEPLOYMENT_HOST\", `https://${instanceInfo.mgmt_address}:443`);",
+									"pm.environment.set(\"DEPLOYMENT_HOST_USERNAME\", instanceInfo.api_username);",
+									"pm.environment.set(\"DEPLOYMENT_HOST_PASSWORD\", instanceInfo.api_password);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/v1/system/infra/bootstrap",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"system",
+								"infra",
+								"bootstrap"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check Services Install",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"TOKEN\", pm.response.json().access_token);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const instanceInfo = JSON.parse(pm.environment.get(\"DEPLOYMENT_INFO\")).instances.find((instance) => instance.type === 'cm');",
+									"pm.environment.set(\"DEPLOYMENT_HOST\", `https://${instanceInfo.mgmt_address}:443`);",
+									"pm.environment.set(\"DEPLOYMENT_HOST_USERNAME\", instanceInfo.api_username);",
+									"pm.environment.set(\"DEPLOYMENT_HOST_PASSWORD\", instanceInfo.api_password);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/v1/system/infra/bootstrap",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"system",
+								"infra",
+								"bootstrap"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "System",
+			"item": [
+				{
+					"name": "Login (deployment info)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"TOKEN\", pm.response.json().access_token);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const instanceInfo = JSON.parse(pm.environment.get(\"DEPLOYMENT_INFO\")).instances.find((instance) => instance.type === 'cm');",
+									"pm.environment.set(\"DEPLOYMENT_HOST\", `https://${instanceInfo.mgmt_address}:443`);",
+									"pm.environment.set(\"DEPLOYMENT_HOST_USERNAME\", instanceInfo.api_username);",
+									"pm.environment.set(\"DEPLOYMENT_HOST_PASSWORD\", instanceInfo.api_password);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"{{DEPLOYMENT_HOST_USERNAME}}\",\n    \"password\": \"{{DEPLOYMENT_HOST_PASSWORD}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/login",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Summary",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/device/v1/summary",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"device",
+								"v1",
+								"summary"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Tasks",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/v1/system/tasks/c97e5162-f5ea-4215-9380-afcb6d82ca57",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"system",
+								"tasks",
+								"c97e5162-f5ea-4215-9380-afcb6d82ca57"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get OpenAPI",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/openapi",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"openapi"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Instances",
+			"item": [
+				{
+					"name": "Get Instances",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.json()._embedded[\"devices\"].length)",
+									"{",
+									"    pm.collectionVariables.set(\"LAST_RESOURCE_ID\", pm.response.json()._embedded[\"devices\"][0].id);",
+									"    pm.collectionVariables.set(\"INVENTORY_DEVICE_ADDRESS\", pm.response.json()._embedded[\"devices\"][0].address);",
+									"    pm.collectionVariables.set(\"INVENTORY_DEVICE_ADDRESS_2\", pm.response.json()._embedded[\"devices\"][1].address);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/v1/spaces/default/instances",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"spaces",
+								"default",
+								"instances"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Instance VRFs",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/v1/spaces/default/instances/{{LAST_RESOURCE_ID}}/vrfs",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"spaces",
+								"default",
+								"instances",
+								"{{LAST_RESOURCE_ID}}",
+								"vrfs"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Application Deployment Stub",
+			"item": [
+				{
+					"name": "Get Deployment-Stub",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code === 200 && pm.response.json().count)",
+									"{",
+									"    pm.collectionVariables.set(\"LAST_RESOURCE_ID\", pm.response.json()._embedded[\"appsvcs\"][0].id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/deployment-stub/v1/applications",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"deployment-stub",
+								"v1",
+								"applications"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Application Templates (FAST)",
+			"item": [
+				{
+					"name": "Get Application Templates",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/v1/spaces/default/application-templates",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"spaces",
+								"default",
+								"application-templates"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Application Template (By Name)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/v1/spaces/default/application-templates/Examples/http",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"spaces",
+								"default",
+								"application-templates",
+								"Examples",
+								"http"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Application Template",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/v1/spaces/default/application-templates",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"spaces",
+								"default",
+								"application-templates"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Application Templates List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code === 200 && pm.response.json()._embedded[\"templates\"].length)",
+									"{",
+									"    pm.collectionVariables.set(\"LAST_RESOURCE_ID\", pm.response.json()._embedded[\"templates\"][0].id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/v1/spaces/default/application-templates/list",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"spaces",
+								"default",
+								"application-templates",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Application Template List Item (By ID) | broken?",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/v1/spaces/default/application-templates/{{LAST_RESOURCE_ID}}",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"spaces",
+								"default",
+								"application-templates",
+								"{{LAST_RESOURCE_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Application Template Sets",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/v1/spaces/default/application-template-sets",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"spaces",
+								"default",
+								"application-template-sets"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Application Blueprints (FAST)",
+			"item": [
+				{
+					"name": "Get Application Blueprints",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code === 200 && pm.response.json().count)",
+									"{",
+									"    pm.collectionVariables.set(\"LAST_RESOURCE_ID\", pm.response.json()._embedded[\"appsvcs\"][0].id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/v1/spaces/default/appsvcs/blueprints",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"spaces",
+								"default",
+								"appsvcs",
+								"blueprints"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Application Blueprint",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code === 200 && pm.response.json().count)",
+									"{",
+									"    pm.collectionVariables.set(\"LAST_RESOURCE_ID\", pm.response.json()._embedded[\"appsvcs\"][0].id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/v1/spaces/default/appsvcs/blueprints/{{LAST_RESOURCE_ID}}",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"spaces",
+								"default",
+								"appsvcs",
+								"blueprints",
+								"{{LAST_RESOURCE_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Application Blueprint Deployments",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code === 200 && pm.response.json().count)",
+									"{",
+									"    pm.collectionVariables.set(\"LAST_RESOURCE_ID\", pm.response.json()._embedded[\"appsvcs\"][0].id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/v1/spaces/default/appsvcs/blueprints/{{LAST_RESOURCE_ID}}",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"spaces",
+								"default",
+								"appsvcs",
+								"blueprints",
+								"{{LAST_RESOURCE_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Application Blueprint",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.json().id)",
+									"{",
+									"    pm.collectionVariables.set(\"LAST_RESOURCE_ID\", pm.response.json().id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"my_app01\",\n    \"set_name\": \"Examples\",\n    \"template_name\": \"http\",\n    \"parameters\": {\n        \"globalResiliency\": false,\n        \"pools\": [\n            {\n                \"servicePort\": 80,\n                \"loadBalancingMode\": \"round-robin\",\n                \"monitorType\": [\n                    \"http\"\n                ],\n                \"poolName\": \"app01_pool\"\n            }\n        ],\n        \"virtuals\": [\n            {\n                \"virtualPort\": 80,\n                \"virtualName\": \"app01_vs\",\n                \"pool\": \"app01_pool\"\n            }\n        ],\n        \"application_description\": \"application 01\",\n        \"application_name\": \"my_app01\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/v1/spaces/default/appsvcs/blueprints",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"spaces",
+								"default",
+								"appsvcs",
+								"blueprints"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deploy Application Blueprint",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"deployments\": [\n            {\n                \"allow_overwrite\": true,\n                \"parameters\": {\n                    \"pools\": [\n                        {\n                            \"poolMembers\": [\n                                {\n                                    \"address\": \"10.10.10.10\",\n                                    \"name\": \"member01\"\n                                }\n                            ],\n                            \"poolName\": \"App_HTTP_1_pool\"\n                        },\n                        {\n                            \"poolMembers\": [\n                                {\n                                    \"address\": \"10.10.10.20\",\n                                    \"name\": \"member02\"\n                                }\n                            ],\n                            \"poolName\": \"App_HTTP_2_pool\"\n                        },\n                        {\n                            \"poolMembers\": [\n                                {\n                                    \"address\": \"10.10.10.30\",\n                                    \"name\": \"member03\"\n                                }\n                            ],\n                            \"poolName\": \"App_HTTP_3_pool\"\n                        },\n                        {\n                            \"poolMembers\": [\n                                {\n                                    \"address\": \"10.10.10.10\",\n                                    \"name\": \"member04\"\n                                }\n                            ],\n                            \"poolName\": \"App_HTTPS_1_pool\"\n                        },\n                        {\n                            \"poolMembers\": [\n                                {\n                                    \"address\": \"10.10.10.20\",\n                                    \"name\": \"member05\"\n                                }\n                            ],\n                            \"poolName\": \"App_HTTPS_2_pool\"\n                        },\n                        {\n                            \"poolMembers\": [\n                                {\n                                    \"address\": \"10.10.10.30\",\n                                    \"name\": \"member06\"\n                                }\n                            ],\n                            \"poolName\": \"App_HTTPS_3_pool\"\n                        },\n                        {\n                            \"poolMembers\": [\n                                {\n                                    \"address\": \"10.10.10.40\",\n                                    \"name\": \"member07\"\n                                }\n                            ],\n                            \"poolName\": \"App_HTTPS_4_pool\"\n                        },\n                        {\n                            \"poolMembers\": [\n                                {\n                                    \"address\": \"10.10.10.10\",\n                                    \"name\": \"member08\"\n                                }\n                            ],\n                            \"poolName\": \"App_TCP_1_pool\"\n                        },\n                        {\n                            \"poolMembers\": [\n                                {\n                                    \"address\": \"10.10.10.20\",\n                                    \"name\": \"member09\"\n                                }\n                            ],\n                            \"poolName\": \"App_TCP_2_pool\"\n                        },\n                        {\n                            \"poolMembers\": [\n                                {\n                                    \"address\": \"10.10.10.30\",\n                                    \"name\": \"member10\"\n                                }\n                            ],\n                            \"poolName\": \"App_TCP_3_pool\"\n                        }\n                    ],\n                    \"virtuals\": [\n                        {\n                            \"virtualAddress\": \"192.168.1.10\",\n                            \"virtualName\": \"App_HTTP_1_vs\"\n                        },\n                        {\n                            \"virtualAddress\": \"192.168.1.20\",\n                            \"virtualName\": \"App_HTTP_2_vs\"\n                        },\n                        {\n                            \"virtualAddress\": \"192.168.1.30\",\n                            \"virtualName\": \"App_HTTP_3_vs\"\n                        },\n                        {\n                            \"virtualAddress\": \"192.168.1.10\",\n                            \"virtualName\": \"App_HTTPS_1_vs\"\n                        },\n                        {\n                            \"virtualAddress\": \"192.168.1.20\",\n                            \"virtualName\": \"App_HTTPS_2_vs\"\n                        },\n                        {\n                            \"virtualAddress\": \"192.168.1.30\",\n                            \"virtualName\": \"App_HTTPS_3_vs\"\n                        },\n                        {\n                            \"virtualAddress\": \"192.168.1.40\",\n                            \"virtualName\": \"App_HTTPS_4_vs\"\n                        },\n                        {\n                            \"virtualAddress\": \"192.168.1.10\",\n                            \"virtualName\": \"App_TCP_1_vs\"\n                        },\n                        {\n                            \"virtualAddress\": \"192.168.1.20\",\n                            \"virtualName\": \"App_TCP_2_vs\"\n                        },\n                        {\n                            \"virtualAddress\": \"192.168.1.30\",\n                            \"virtualName\": \"App_TCP_3_vs\"\n                        }\n                    ]\n                },\n                \"target\": {\n                    \"address\": \"{{INVENTORY_DEVICE_ADDRESS}}\"\n                }\n            }\n        ]\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/v1/spaces/default/appsvcs/blueprints/{{LAST_RESOURCE_ID}}/deployments",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"spaces",
+								"default",
+								"appsvcs",
+								"blueprints",
+								"{{LAST_RESOURCE_ID}}",
+								"deployments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deploy Application Blueprint (Existing Deployment)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"existing_deployments\": [\n        {\n            \"deployment_id\": \"853bb0d4-197e-4238-92c3-20fbb32e44a7\",\n            \"parameters\": {\n                \"pools\": [\n                    {\n                        \"poolName\": \"pool01\",\n                        \"poolMembers\": [\n                            {\n                                \"address\": \"10.10.10.100\",\n                                \"name\": \"member01\"\n                            }\n                        ],\n                        \"isServicePool\": false\n                    }\n                ],\n                \"virtuals\": [\n                    {\n                        \"virtualName\": \"vs01\",\n                        \"virtualAddress\": \"10.10.10.11\",\n                        \"enable_allow_networks\": false,\n                        \"allow_networks\": []\n                    }\n                ]\n            },\n            \"additional_parameters\": {},\n            \"target\": {\n                \"address\": \"10.145.65.227\"\n            }\n        }\n    ],\n    \"delete_deployments\": [],\n    \"new_deployments\": [],\n    \"additional_parameters\": {\n        \"generic_hosts\": {\n            \"added\": [],\n            \"updated\": [],\n            \"deleted\": []\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/v1/spaces/default/appsvcs/blueprints/{{LAST_RESOURCE_ID}}",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"spaces",
+								"default",
+								"appsvcs",
+								"blueprints",
+								"{{LAST_RESOURCE_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Application Blueprint",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/v1/spaces/default/appsvcs/blueprints/{{LAST_RESOURCE_ID}}",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"spaces",
+								"default",
+								"appsvcs",
+								"blueprints",
+								"{{LAST_RESOURCE_ID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Application Documents (AS3)",
+			"item": [
+				{
+					"name": "Get Application Documents",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code === 200 && pm.response.json().count)",
+									"{",
+									"    pm.collectionVariables.set(\"LAST_RESOURCE_ID\", pm.response.json()._embedded[\"appsvcs\"][0].id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/v1/spaces/default/appsvcs/documents",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"spaces",
+								"default",
+								"appsvcs",
+								"documents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Application Document",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code === 200 && pm.response.json().count)",
+									"{",
+									"    pm.collectionVariables.set(\"LAST_RESOURCE_ID\", pm.response.json()._embedded[\"appsvcs\"][0].id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/v1/spaces/default/appsvcs/documents/{{LAST_RESOURCE_ID}}",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"spaces",
+								"default",
+								"appsvcs",
+								"documents",
+								"{{LAST_RESOURCE_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Application Document Deployments",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code === 200 && pm.response.json().count)",
+									"{",
+									"    pm.collectionVariables.set(\"LAST_RESOURCE_ID\", pm.response.json()._embedded[\"appsvcs\"][0].id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/v1/spaces/default/appsvcs/documents/{{LAST_RESOURCE_ID}}",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"spaces",
+								"default",
+								"appsvcs",
+								"documents",
+								"{{LAST_RESOURCE_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Application Document",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.json().id)",
+									"{",
+									"    pm.collectionVariables.set(\"LAST_RESOURCE_ID\", pm.response.json().id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"document\": {\n        \"my_tenant01.my_app01\": {\n            \"class\": \"Application\",\n            \"my_pool\": {\n                \"class\": \"Pool\",\n                \"loadBalancingMode\": \"least-connections-member\",\n                \"members\": [\n                {\n                    \"serverAddresses\": [\n                    \"198.18.10.10\"\n                    ],\n                    \"servicePort\": 80\n                }\n                ]\n            },\n            \"my_service\": {\n                \"class\": \"Service_HTTP\",\n                \"enable\": true,\n                \"persistenceMethods\": [\n                \"source-address\"\n                ],\n                \"pool\": \"my_pool\",\n                \"policyWAF\": {\n                    \"bigip\": \"foo\"\n                },\n                \"remark\": \"custom remark\",\n                \"virtualAddresses\": [\n                \"198.18.1.10\"\n                ],\n                \"virtualPort\": 80,\n                \"iRules\": [\n                    {\n                        \"cm\": \"my-irule01::v1\"\n                    }\n                ]\n            },\n            \"remark\": \"canonical application\"\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/v1/spaces/default/appsvcs/documents",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"spaces",
+								"default",
+								"appsvcs",
+								"documents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Application Document Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.json().id)",
+									"{",
+									"    pm.collectionVariables.set(\"LAST_RESOURCE_ID\", pm.response.json().id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"location\": {\n        \"address\": \"{{INVENTORY_DEVICE_ADDRESS}}\"\n    },\n    \"document\": {\n        \"my_as3_per_app_01\": {\n            \"class\": \"Application\",\n            \"vs1\": {\n                \"class\": \"Service_HTTP\",\n                \"mirroring\": \"L4\",\n                \"persistenceMethods\": [],\n                \"pool\": \"pool1\",\n                \"snat\": \"auto\",\n                \"virtualPort\": 80,\n                \"virtualAddresses\": [\n                    \"10.2.2.3\"\n                ],\n                \"iRules\": [\n                    {\n                        \"cm\": \"irule01::v2\"\n                    }\n                ]\n            },\n            \"pool1\": {\n                \"class\": \"Pool\",\n                \"loadBalancingMode\": \"round-robin\",\n                \"members\": [\n                    {\n                        \"ratio\": 10,\n                        \"servers\": [],\n                        \"servicePort\": 80\n                    }\n                ]\n            }\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/v1/spaces/default/appsvcs/documents",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"spaces",
+								"default",
+								"appsvcs",
+								"documents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modify Application Document",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.json().id)",
+									"{",
+									"    pm.collectionVariables.set(\"LAST_RESOURCE_ID\", pm.response.json().id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"class\": \"ADC\",\n    \"schemaVersion\": \"3.0.0\",\n    \"default\": {\n        \"class\": \"Tenant\",\n        \"app_01\": {\n            \"class\": \"Application\",\n            \"my_service\": {\n                \"pool\": \"my_pool\",\n                \"snat\": \"auto\",\n                \"virtualPort\": 80,\n                \"virtualAddresses\": [\n                    \"5.6.7.8\"\n                ],\n                \"class\": \"Service_HTTP\"\n            },\n            \"my_pool\": {\n                \"members\": [\n                    {\n                        \"servicePort\": 80,\n                        \"serverAddresses\": [\n                            \"5.6.7.8\"\n                        ]\n                    }\n                ],\n                \"loadBalancingMode\": \"round-robin\",\n                \"class\": \"Pool\"\n            }\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/v1/spaces/default/appsvcs/documents/{{LAST_RESOURCE_ID}}",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"spaces",
+								"default",
+								"appsvcs",
+								"documents",
+								"{{LAST_RESOURCE_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deploy Application Document",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"target\": \"{{INVENTORY_DEVICE_ADDRESS}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/v1/spaces/default/appsvcs/documents/{{LAST_RESOURCE_ID}}/deployments",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"spaces",
+								"default",
+								"appsvcs",
+								"documents",
+								"{{LAST_RESOURCE_ID}}",
+								"deployments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Application Document",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/v1/spaces/default/appsvcs/documents/{{LAST_RESOURCE_ID}}",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"spaces",
+								"default",
+								"appsvcs",
+								"documents",
+								"{{LAST_RESOURCE_ID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Application Compat (AS3)",
+			"item": [
+				{
+					"name": "Get Config",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/v1/spaces/default/appsvcs/declare?target_address={{INVENTORY_DEVICE_ADDRESS}}",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"spaces",
+								"default",
+								"appsvcs",
+								"declare"
+							],
+							"query": [
+								{
+									"key": "target_address",
+									"value": "{{INVENTORY_DEVICE_ADDRESS}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deploy Config",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"class\": \"ADC\",\n  \"id\": \"adc-canonical\",\n  \"schemaVersion\": \"3.0.0\",\n  \"my_tenant\": {\n    \"class\": \"Tenant\",\n    \"my_app\": {\n      \"class\": \"Application\",\n      \"my_pool\": {\n        \"class\": \"Pool\",\n        \"loadBalancingMode\": \"least-connections-member\",\n        \"members\": [\n          {\n            \"serverAddresses\": [\n              \"198.18.10.10\"\n            ],\n            \"servicePort\": 80\n          }\n        ]\n      },\n      \"my_service\": {\n        \"class\": \"Service_HTTP\",\n        \"enable\": true,\n        \"persistenceMethods\": [\n          \"source-address\"\n        ],\n        \"pool\": \"my_pool\",\n        \"remark\": \"custom remark\",\n        \"virtualAddresses\": [\n          \"198.18.1.10\"\n        ],\n        \"virtualPort\": 80\n      },\n      \"remark\": \"canonical application\"\n    },\n    \"my_app_2\": {\n      \"class\": \"Application\",\n      \"my_pool\": {\n        \"class\": \"Pool\",\n        \"loadBalancingMode\": \"least-connections-member\",\n        \"members\": [\n          {\n            \"serverAddresses\": [\n              \"198.18.10.20\"\n            ],\n            \"servicePort\": 80\n          }\n        ]\n      },\n      \"my_service\": {\n        \"class\": \"Service_HTTP\",\n        \"enable\": true,\n        \"persistenceMethods\": [\n          \"source-address\"\n        ],\n        \"pool\": \"my_pool\",\n        \"remark\": \"custom remark 2\",\n        \"virtualAddresses\": [\n          \"198.18.1.20\"\n        ],\n        \"virtualPort\": 80\n      },\n      \"remark\": \"canonical application 2\"\n    }\n  },\n  \"my_tenant_2\": {\n    \"class\": \"Tenant\",\n    \"my_app\": {\n      \"class\": \"Application\",\n      \"my_pool\": {\n        \"class\": \"Pool\",\n        \"loadBalancingMode\": \"least-connections-member\",\n        \"members\": [\n          {\n            \"serverAddresses\": [\n              \"198.18.10.10\"\n            ],\n            \"servicePort\": 80\n          }\n        ]\n      },\n      \"my_service\": {\n        \"class\": \"Service_HTTP\",\n        \"enable\": true,\n        \"persistenceMethods\": [\n          \"source-address\"\n        ],\n        \"pool\": \"my_pool\",\n        \"remark\": \"custom remark\",\n        \"virtualAddresses\": [\n          \"198.18.1.10\"\n        ],\n        \"virtualPort\": 80\n      },\n      \"remark\": \"canonical application\"\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/v1/spaces/default/appsvcs/declare?target_address={{INVENTORY_DEVICE_ADDRESS}}",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"spaces",
+								"default",
+								"appsvcs",
+								"declare"
+							],
+							"query": [
+								{
+									"key": "target_address",
+									"value": "{{INVENTORY_DEVICE_ADDRESS}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Config",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/v1/spaces/default/appsvcs/declare?target_address={{INVENTORY_DEVICE_ADDRESS}}",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"spaces",
+								"default",
+								"appsvcs",
+								"declare"
+							],
+							"query": [
+								{
+									"key": "target_address",
+									"value": "{{INVENTORY_DEVICE_ADDRESS}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Config (Tenant)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/v1/spaces/default/appsvcs/declare?target_address={{INVENTORY_DEVICE_ADDRESS}}",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"spaces",
+								"default",
+								"appsvcs",
+								"declare"
+							],
+							"query": [
+								{
+									"key": "target_address",
+									"value": "{{INVENTORY_DEVICE_ADDRESS}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "WAF",
+			"item": [
+				{
+					"name": "Get WAF Policies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/v1/spaces/default/security/waf-policies",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"spaces",
+								"default",
+								"security",
+								"waf-policies"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "iRules",
+			"item": [
+				{
+					"name": "Get iRules",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/v1/spaces/default/security/waf-policies",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"spaces",
+								"default",
+								"security",
+								"waf-policies"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Access",
+			"item": [
+				{
+					"name": "GET Access Policies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code === 200)",
+									"{",
+									"    pm.collectionVariables.set(\"LAST_RESOURCE_ID\", pm.response.json()._embedded[\"policies\"][0].id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/v1/spaces/default/security/access-policies",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"spaces",
+								"default",
+								"security",
+								"access-policies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Access Policies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{DEPLOYMENT_HOST}}/api/v1/spaces/default/security/access-policies/{{LAST_RESOURCE_ID}}",
+							"host": [
+								"{{DEPLOYMENT_HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"spaces",
+								"default",
+								"security",
+								"access-policies",
+								"{{LAST_RESOURCE_ID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{TOKEN}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "TOKEN",
+			"value": ""
+		},
+		{
+			"key": "LAST_RESOURCE_ID",
+			"value": ""
+		},
+		{
+			"key": "INVENTORY_DEVICE_ADDRESS",
+			"value": ""
+		},
+		{
+			"key": "INVENTORY_DEVICE_ADDRESS_2",
+			"value": ""
+		}
+	]
+}
