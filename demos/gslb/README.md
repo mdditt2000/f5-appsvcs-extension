@@ -1,6 +1,6 @@
 ### Create GSLB objects in Commom Partition using AS3
 
-#### Datacenters are logical groupings of devices that share a gateway. Two examples below are **SanJose-DC-A** and **SanJose-DC-B**
+#### DataCenters are logical groupings of devices that share a gateway. Two examples below are SanJose-DC-A and SanJose-DC-B
 
 ```
 {
@@ -48,7 +48,7 @@
 }
 ```
 
-Topology Regions
+#### Topology Regions
 
 ```
 {
@@ -63,7 +63,7 @@ Topology Regions
     }
 }
 ```
-Monitors
+#### Monitors
 
 ```
 {
