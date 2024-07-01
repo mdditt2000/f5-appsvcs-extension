@@ -20,12 +20,12 @@ Datacenters are logical groupings of devices that share a gateway. Two examples 
                 "location": "San Jose, CA"
             },
             "Charlotte-DC": {
-				"class": "GSLB_Data_Center",
-				"enabled": true,
-				"contact": "Mark Dittmer",
-				"location": "Charlotte, NC"
-			}
+                "class": "GSLB_Data_Center",
+                "enabled": true,
+                "contact": "Mark Dittmer",
+                "location": "Charlotte, NC"
+            }
         }
     }
-}  
+}
 ```
