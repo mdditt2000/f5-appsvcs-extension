@@ -2,23 +2,45 @@
     "class": "ADC",
     "$schema": "https://raw.githubusercontent.com/F5Networks/f5-appsvcs-extension/main/schema/latest/as3-schema.json",
     "schemaVersion": "3.50.0",
-    "remark": "DataCenter Example",
+    "remark": "GSLB_Common",
     "Common": {
         "class": "Tenant",
         "Shared": {
             "class": "Application",
             "template": "shared",
-            "SanJose-DC": {
+            "SanJose-DC-A": {
                 "class": "GSLB_Data_Center",
                 "enabled": true,
                 "contact": "Mark Dittmer",
                 "location": "San Jose, CA"
             },
-            "Charlotte-DC": {
+            "SanJose-DC-B": {
                 "class": "GSLB_Data_Center",
                 "enabled": true,
                 "contact": "Mark Dittmer",
-                "location": "Charlotte, NC"
+                "location": "San Jose, CA"
+            },
+            "SiteA_F5Demo": {
+                "class": "GSLB_Server",
+                "dataCenter": {
+                    "use": "SanJose-DC-A"
+                },
+                "devices": [
+                    {
+                        "address": "10.192.75.63"
+                    }
+                ]
+            },
+            "SiteB_F5Demo": {
+                "class": "GSLB_Server",
+                "dataCenter": {
+                    "use": "SanJose-DC-B"
+                },
+                "devices": [
+                    {
+                        "address": "10.192.125.63"
+                    }
+                ]
             },
             "http_monitor": {
                 "class": "GSLB_Monitor",

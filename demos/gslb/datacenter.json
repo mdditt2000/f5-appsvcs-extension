@@ -1,14 +1,14 @@
 {
-    "SanJose-DC": {
+    "SanJose-DC-A": {
         "class": "GSLB_Data_Center",
         "enabled": true,
         "contact": "Mark Dittmer",
         "location": "San Jose, CA"
     },
-    "Charlotte-DC": {
+    "SanJose-DC-B": {
         "class": "GSLB_Data_Center",
         "enabled": true,
         "contact": "Mark Dittmer",
-        "location": "Charlotte, NC"
+        "location": "San Jose, CA"
     }
 }
