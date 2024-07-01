@@ -33,3 +33,19 @@ Topology Regions
     }
 }
 ```
+Monitors
+
+```
+{
+    "http_monitor": {
+        "class": "GSLB_Monitor",
+        "monitorType": "http",
+        "target": "*:*",
+        "interval": 5,
+        "probeTimeout": 5,
+        "send": "GET /healthcheck.htm",
+        "receive": "",
+        "timeout": 16
+    }
+}
+```
