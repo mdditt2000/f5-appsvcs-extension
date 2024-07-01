@@ -21,6 +21,8 @@
 
 #### Server objects need to be defined and grouped into a Datacenter
 
+**Note** virtualServerDiscoveryMode": "disabled and therefore using generic-host
+
 ```
 {
     "SiteA_F5Demo": {

@@ -29,6 +29,15 @@
                     {
                         "address": "10.192.75.63"
                     }
+                ],
+                "enabled": true,
+                "monitors": [],
+                "serverType": "generic-host",
+                "virtualServers": [
+                    {
+                        "address": "10.192.75.71",
+                        "port": 443
+                    }
                 ]
             },
             "SiteB_F5Demo": {
@@ -39,6 +48,15 @@
                 "devices": [
                     {
                         "address": "10.192.125.63"
+                    }
+                ],
+                "enabled": true,
+                "monitors": [],
+                "serverType": "generic-host",
+                "virtualServers": [
+                    {
+                        "address": "10.192.125.71",
+                        "port": 443
                     }
                 ]
             },
@@ -51,6 +69,38 @@
                 "send": "GET /healthcheck.htm",
                 "receive": "",
                 "timeout": 16
+            },
+            "SiteA_F5Demo_Pool": {
+                "class": "GSLB_Pool",
+                "enabled": true,
+                "fallbackIP": "10.192.75.60",
+                "lbModeAlternate": "global-availability",
+                "lbModeFallback": "fallback-ip",
+                "lbModePreferred": "topology",
+                "members": [
+                    {
+                        "ratio": 1,
+                        "server": {
+                            "use": "/Common/Shared/SiteA_F5Demo"
+                        },
+                        "virtualServer": "/Site_F5Demo/Need-to-add"
+                    },
+                    {
+                        "ratio": 1,
+                        "server": {
+                            "use": "/Common/Shared/SiteB_F5Demo"
+                        },
+                        "virtualServer": "/Site_F5Demo/Need-to-add"
+                    }
+                ],
+                "monitors": [
+                    {
+                        "use": "http_monitor"
+                    }
+                ],
+                "resourceRecordType": "A",
+                "ttl": 30,
+                "verifyMemberEnabled": true
             },
             "Any": {
                 "class": "GSLB_Topology_Region",

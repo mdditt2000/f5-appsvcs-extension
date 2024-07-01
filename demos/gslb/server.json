@@ -8,6 +8,15 @@
             {
                 "address": "10.192.75.63"
             }
+        ],
+        "enabled": true,
+        "monitors": [],
+        "serverType": "generic-host",
+        "virtualServers": [
+            {
+                "address": "10.192.75.71",
+                "port": 443
+            }
         ]
     },
     "SiteB_F5Demo": {
@@ -18,6 +27,15 @@
         "devices": [
             {
                 "address": "10.192.125.63"
+            }
+        ],
+        "enabled": true,
+        "monitors": [],
+        "serverType": "generic-host",
+        "virtualServers": [
+            {
+                "address": "10.192.125.71",
+                "port": 443
             }
         ]
     }
