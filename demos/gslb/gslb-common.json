@@ -70,7 +70,7 @@
                 "receive": "",
                 "timeout": 16
             },
-            "SiteA_F5Demo_Pool": {
+            "Site_F5Demo_Pool": {
                 "class": "GSLB_Pool",
                 "enabled": true,
                 "fallbackIP": "10.192.75.60",
@@ -101,6 +101,17 @@
                 "resourceRecordType": "A",
                 "ttl": 30,
                 "verifyMemberEnabled": true
+            },
+            "Site_F5Demo_Pool_wip": {
+                "class": "GSLB_Domain",
+                "domainName": "f5demo.example.com",
+                "poolLbMode": "topology",
+                "pools": [
+                    {
+                        "use": "Site_F5Demo_Pool"
+                    }
+                ],
+                "resourceRecordType": "A"
             },
             "Any": {
                 "class": "GSLB_Topology_Region",
