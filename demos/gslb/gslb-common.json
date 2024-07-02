@@ -102,7 +102,7 @@
                 "ttl": 30,
                 "verifyMemberEnabled": true
             },
-            "Site_F5Demo_Pool_wip": {
+            "Site_F5Demo_WIP": {
                 "class": "GSLB_Domain",
                 "domainName": "f5demo.example.com",
                 "poolLbMode": "topology",
