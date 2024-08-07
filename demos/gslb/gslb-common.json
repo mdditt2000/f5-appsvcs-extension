@@ -83,14 +83,7 @@
                         "server": {
                             "use": "/Common/Shared/SiteA_F5Demo"
                         },
-                        "virtualServer": "/Site_F5Demo/Need-to-add"
-                    },
-                    {
-                        "ratio": 1,
-                        "server": {
-                            "use": "/Common/Shared/SiteB_F5Demo"
-                        },
-                        "virtualServer": "/Site_F5Demo/Need-to-add"
+                        "virtualServer": "/GSLB_LTM_APP/apps_443"
                     }
                 ],
                 "monitors": [

@@ -1,0 +1,61 @@
+{
+    "class": "ADC",
+    "$schema": "https://raw.githubusercontent.com/F5Networks/f5-appsvcs-extension/main/schema/latest/as3-schema.json",
+    "schemaVersion": "3.50.0",
+    "GSLB_LTM_APP": {
+        "class": "Tenant",
+        "apps_443": {
+            "class": "Application",
+            "apps_443": {
+                "class": "Service_L4",
+                "layer4": "tcp",
+                "pool": "apps_pool",
+                "virtualAddresses": [
+                    "10.192.75.68"
+                ],
+                "virtualPort": 443
+            },
+            "apps_pool": {
+                "class": "Pool",
+                "members": [
+                    {
+                        "enable": true,
+                        "priorityGroup": 0,
+                        "ratio": 1,
+                        "serverAddresses": [
+                            "10.10.13.14"
+                        ],
+                        "servicePort": 443
+                    },
+                    {
+                        "enable": true,
+                        "priorityGroup": 0,
+                        "ratio": 1,
+                        "serverAddresses": [
+                            "10.10.13.15"
+                        ],
+                        "servicePort": 443
+                    },
+                    {
+                        "enable": true,
+                        "priorityGroup": 0,
+                        "ratio": 1,
+                        "serverAddresses": [
+                            "10.10.13.26"
+                        ],
+                        "servicePort": 443
+                    },
+                    {
+                        "enable": true,
+                        "priorityGroup": 0,
+                        "ratio": 1,
+                        "serverAddresses": [
+                            "10.10.13.124"
+                        ],
+                        "servicePort": 443
+                    }
+                ]
+            }
+        }
+    }
+}

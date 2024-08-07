@@ -81,3 +81,48 @@
     }
 }
 ```
+#### Pools
+
+            "Site_F5Demo_Pool": {
+                "class": "GSLB_Pool",
+                "enabled": true,
+                "fallbackIP": "10.192.75.60",
+                "lbModeAlternate": "global-availability",
+                "lbModeFallback": "fallback-ip",
+                "lbModePreferred": "topology",
+                "members": [
+                    {
+                        "ratio": 1,
+                        "server": {
+                            "use": "/Common/Shared/SiteA_F5Demo"
+                        },
+                        "virtualServer": "/LB_LTM_APP/apps_443"
+                    },
+                    {
+                        "ratio": 1,
+                        "server": {
+                            "use": "/Common/Shared/SiteB_F5Demo"
+                        },
+                        "virtualServer": "//LB_LTM_APP/apps_443"
+                    }
+                ],
+                "monitors": [
+                    {
+                        "use": "http_monitor"
+                    }
+                ],
+                "resourceRecordType": "A",
+                "ttl": 30,
+                "verifyMemberEnabled": true
+            },
+            "Site_F5Demo_WIP": {
+                "class": "GSLB_Domain",
+                "domainName": "f5demo.example.com",
+                "poolLbMode": "topology",
+                "pools": [
+                    {
+                        "use": "Site_F5Demo_Pool"
+                    }
+                ],
+                "resourceRecordType": "A"
+            },
