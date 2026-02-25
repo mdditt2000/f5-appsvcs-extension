@@ -1,0 +1,36 @@
+{
+    "name": "App_HTTP_1",
+    "partition": "App_Service",
+    "strictUpdates": false,
+    "resources": [
+        {
+            "kind": "tm:ltm:monitor:http",
+            "properties": {
+                "name": "http",
+                "interval": 5,
+                "timeout": 16
+            }
+        },
+        {
+            "kind": "tm:ltm:pool",
+            "properties": {
+                "name": "Pool_1",
+                "members": [
+                    {
+                        "name": "10.2.74.15:80"
+                    }
+                ],
+                "monitor": "http"
+            }
+        },
+        {
+            "kind": "tm:ltm:virtual",
+            "properties": {
+                "name": "virtual_1",
+                "destination": "10.2.73.15:80",
+                "mask": "255.255.255.255",
+                "pool": "pool_1"
+            }
+        }
+    ]
+}
