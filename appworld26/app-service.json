@@ -1,5 +1,5 @@
 {
-    "name": "App_HTTP_1",
+    "name": "App_HTTP_01",
     "partition": "App_Service",
     "strictUpdates": false,
     "resources": [
@@ -15,9 +15,52 @@
             "kind": "tm:ltm:pool",
             "properties": {
                 "name": "Pool_1",
+                "loadBalancingMode": "round-robin",
                 "members": [
                     {
-                        "name": "10.2.74.15:80"
+                        "name": "/App_Service/10.2.74.15:80"
+                    },
+                    {
+                        "name": "/App_Service/10.2.74.16:80"
+                    },
+                    {
+                        "name": "/App_Service/10.2.74.17:80"
+                    },
+                    {
+                        "name": "/App_Service/10.2.74.18:80"
+                    },
+                    {
+                        "name": "/App_Service/10.2.74.19:80"
+                    },
+                    {
+                        "name": "/App_Service/10.2.74.20:80"
+                    },
+                    {
+                        "name": "/App_Service/10.2.74.21:80"
+                    },
+                    {
+                        "name": "/App_Service/10.2.74.22:80"
+                    },
+                    {
+                        "name": "/App_Service/10.2.74.23:80"
+                    },
+                    {
+                        "name": "/App_Service/10.2.74.24:80"
+                    },
+                    {
+                        "name": "/App_Service/10.2.74.25:80"
+                    },
+                    {
+                        "name": "/App_Service/10.2.74.26:80"
+                    },
+                    {
+                        "name": "/App_Service/10.2.74.27:80"
+                    },
+                    {
+                        "name": "/App_Service/10.2.74.28:80"
+                    },
+                    {
+                        "name": "/App_Service/10.2.74.29:80"
                     }
                 ],
                 "monitor": "http"
@@ -26,7 +69,7 @@
         {
             "kind": "tm:ltm:virtual",
             "properties": {
-                "name": "virtual_1",
+                "name": "Service_1",
                 "destination": "10.2.73.15:80",
                 "mask": "255.255.255.255",
                 "pool": "pool_1"
